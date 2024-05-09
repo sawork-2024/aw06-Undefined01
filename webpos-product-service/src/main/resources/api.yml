@@ -1,0 +1,121 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Pos
+  license:
+    name: MIT
+paths:
+  /product:
+    get:
+      summary: List all products
+      operationId: listProducts
+      tags:
+        - product
+      responses:
+        '200':
+          description: A paged array of products
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /product/{productId}:
+    get:
+      summary: Info for a specific product
+      operationId: showProductById
+      tags:
+        - product
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: The id of the product to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDto"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      summary: Update a product's quantity
+      operationId: updateProduct
+      tags:
+        - product
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: The id of the product to update
+          schema:
+            type: string
+        - name: quantity
+          in: query
+          required: true
+          description: The new quantity of the product
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDto"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    ProductDto:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+          format: double
+        stock:
+          type: integer
+          format: int32
+        quantity:
+          type: integer
+          format: int32
+        image:
+          type: string
+    Products:
+      type: array
+      items:
+        $ref: "#/components/schemas/ProductDto"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

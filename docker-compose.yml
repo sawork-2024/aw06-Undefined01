@@ -1,0 +1,56 @@
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_USER: webpos
+      MYSQL_PASSWORD: webpos
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: webpos
+
+  gateway:
+    image: gateway
+    build:
+      context: .
+      target: gateway
+    ports:
+      - 8080:8801
+    cpu_count: 1
+
+  discovery:
+    image: discovery
+    build:
+      context: .
+      target: discovery
+    cpu_count: 1
+
+  product-service:
+    image: product-service
+    build:
+      context: .
+      target: product-service
+    cpu_count: 1
+    ports:
+      - 8081:8080
+
+  product-service-2:
+    image: product-service
+    build:
+      context: .
+      target: product-service
+    cpu_count: 1
+
+  ordering-service:
+    image: ordering-service
+    build:
+      context: .
+      target: ordering-service
+    cpu_count: 1
+    ports:
+      - 8082:8080
+
+  ordering-service-2:
+    image: ordering-service
+    build:
+      context: .
+      target: ordering-service
+    cpu_count: 1

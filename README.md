@@ -1,6 +1,23 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/IMEm063v)
 # Micro WebPoS 
 
+## 启动方式
+
+```bash
+docker compose up mysql discovery -d
+
+sleep 15
+
+docker compose up product-service -d
+
+sleep 15
+
+docker compose up order-service -d
+
+sleep 15
+
+docker compose up gateway -d
+```
 
 请参考spring-petclinic-rest/spring-petclinic-microserivces 将webpos项目改为微服务架构，具体要求包括：
 1. 至少包含独立的产品管理服务、订单管理服务以及discovery/gateway等微服务架构下需要的基础设施服务；
