@@ -14,14 +14,12 @@ services:
       target: gateway
     ports:
       - 8080:8801
-    cpu_count: 1
 
   discovery:
     image: discovery
     build:
       context: .
       target: discovery
-    cpu_count: 1
 
   product-service:
     image: product-service
