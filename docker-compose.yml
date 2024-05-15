@@ -26,29 +26,25 @@ services:
     build:
       context: .
       target: product-service
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
     cpu_count: 1
     ports:
       - 8081:8080
-
-  product-service-2:
-    image: product-service
-    build:
-      context: .
-      target: product-service
-    cpu_count: 1
 
   ordering-service:
     image: ordering-service
     build:
       context: .
       target: ordering-service
-    cpu_count: 1
-    ports:
-      - 8082:8080
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
 
-  ordering-service-2:
-    image: ordering-service
-    build:
-      context: .
-      target: ordering-service
-    cpu_count: 1

@@ -25,7 +25,7 @@ class SequentialAccessSimulation extends Simulation {
   // Define user load
   setUp(
     userFlowScenario.inject(
-      atOnceUsers(5000)
+      atOnceUsers(100)
     )
   ).protocols(httpProtocol) // Apply the HTTP configuration
 }

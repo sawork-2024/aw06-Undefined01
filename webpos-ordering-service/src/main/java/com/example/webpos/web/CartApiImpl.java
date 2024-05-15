@@ -23,6 +23,14 @@ public class CartApiImpl implements CartApiDelegate {
 
     @Override
     public ResponseEntity<List<CartItemDto>> getCart() {
+        int i = 0;
+        int end = new java.util.Random().nextInt(100000000);
+        for (int j = 0; j < end; j++) {
+            i = i + j;
+        }
+        if (i == 0) {
+            System.out.println("i is zero");
+        }
         return ResponseEntity.ok(posService.getCart().getItems().stream()
             .map(this::toCartItemDto)
             .toList());

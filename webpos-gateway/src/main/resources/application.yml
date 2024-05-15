@@ -16,11 +16,14 @@ spring:
         - name: CircuitBreaker
           args:
             name: myCircuitBreaker
-            fallbackUri: forward:/fallback
       - id: webpos-ordering-service
         predicates:
         - Path=/cart/**
         uri: lb://webpos-ordering-service
+        filters:
+        - name: CircuitBreaker
+          args:
+            name: myCircuitBreaker
 
 resilience4j:
   circuitbreaker:
